@@ -3,6 +3,8 @@
 name: Analyze with ShiftLeft Inspect
 
 on:
+  schedule:
+    - cron: "0 * * * *"  
   push:
     branches:
       - master
