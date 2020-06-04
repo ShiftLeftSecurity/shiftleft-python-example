@@ -1,0 +1,32 @@
+# This workflow integrates ShiftLeft Inspect with GitHub
+# Visit https://docs.shiftleft.io for help
+name: Analyze with ShiftLeft Inspect
+
+on:
+  schedule:
+    - cron: "0 * * * *"  
+  push:
+    branches:
+      - master
+      - feature/*
+      - fix/*
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  Inspect-Win-Build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download ShiftLeft cli
+      run: |
+        Invoke-WebRequest -Uri 'https://cdn.shiftleft.io/download/sl-latest-windows-x64.zip' -OutFile sl.zip
+        Expand-Archive -Path sl.zip -DestinationPath .
+
+    - name: Analyze with Inspect
+      run: .\sl analyze --verbose --no-diagnostic --force --version-id 1 --app ShiftLeftPythonWin --tag branch=${GITHUB_REF} --python $(pwd)
+      env:
+        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        SHIFTLEFT_API_TOKEN: ${{ secrets.SHIFTLEFT_API_TOKEN }}
