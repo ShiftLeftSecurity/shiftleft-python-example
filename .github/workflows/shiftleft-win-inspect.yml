@@ -1,6 +1,6 @@
 # This workflow integrates ShiftLeft Inspect with GitHub
 # Visit https://docs.shiftleft.io for help
-name: Analyze with ShiftLeft Inspect
+name: Analyze with ShiftLeft Inspect on Windows
 
 on:
   schedule:
