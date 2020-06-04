@@ -16,7 +16,7 @@ on:
 
 jobs:
   Inspect-Win-Build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Download ShiftLeft cli
