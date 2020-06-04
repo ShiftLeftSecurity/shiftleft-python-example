@@ -22,7 +22,7 @@ jobs:
         Invoke-WebRequest -Uri 'https://cdn.shiftleft.io/download/sl-latest-windows-x64.zip' -OutFile sl.zip
         Expand-Archive -Path sl.zip -DestinationPath .
     - name: docker pull
-      run: docker pull docker.io/shiftleft/scan-slim
+      run: docker pull --platform=linux docker.io/shiftleft/scan-slim
     - name: Analyze with Inspect
       run: .\sl analyze --verbose --no-diagnostic --force --version-id 1 --app ShiftLeftPythonWin --tag branch=${GITHUB_REF} --python $(pwd)
       env:
