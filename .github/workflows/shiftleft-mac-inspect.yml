@@ -3,8 +3,6 @@
 name: Analyze with ShiftLeft Inspect on Mac
 
 on:
-  schedule:
-    - cron: "0 * * * *"  
   push:
     branches:
       - master
