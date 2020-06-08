@@ -2,7 +2,7 @@ variables:
 - group: shiftleft-token
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 container: shiftleft/inspect:latest
 steps:
 - task: CmdLine@2
