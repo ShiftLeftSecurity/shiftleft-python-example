@@ -3,7 +3,7 @@ variables:
 
 pool:
   vmImage: 'ubuntu-latest'
-container: shiftleft/inspect:latest
+container: shiftleft/scan-java:latest
 steps:
 - task: CmdLine@2
   displayName: Analyze with Inspect
