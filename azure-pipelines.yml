@@ -21,6 +21,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      Invoke-WebRequest -Uri https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip -OutFile release.zip
+      Expand-Archive release.zip -DestinationPath "$Env:ProgramFiles\Linux Containers\."
       '{"experimental":true}' | Out-File "$Env:ProgramData\docker\config\daemon.json " -encoding ASCII
       Restart-Service docker
 - task: CmdLine@2
