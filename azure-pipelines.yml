@@ -30,6 +30,7 @@ steps:
   inputs:
     script: |
       docker pull --platform linux docker.io/shiftleft/scan-slim
+      docker run --platform linux docker.io/shiftleft/scan-slim scan --help
       $(Agent.HomeDirectory)\sl analyze --verbose --no-diagnostic --force --version-id 1 --app ShiftLeftPythonAzWin branch=$(Build.SourceBranchName) --python $(Build.SourcesDirectory)
     workingDirectory: '$(Build.SourcesDirectory)'
   env:
