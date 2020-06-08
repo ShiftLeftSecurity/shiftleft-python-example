@@ -9,8 +9,7 @@ steps:
   displayName: Analyze with Inspect
   inputs:
     script: |      
-      sl scan --verbose --no-diagnostic --force --app ShiftLeftPythonAz branch=$(Build.SourceBranchName) --type=python $(Build.SourcesDirectory)
-    workingDirectory: '$(Build.SourcesDirectory)'
+      sl scan --verbose --no-diagnostic --force --app ShiftLeftPythonAz branch=$(Build.SourceBranchName) --type=python $(pwd)
   env:
     SHIFTLEFT_ORG_ID: $(SHIFTLEFT_ORG_ID)
     SHIFTLEFT_ACCESS_TOKEN: $(SHIFTLEFT_ACCESS_TOKEN)
