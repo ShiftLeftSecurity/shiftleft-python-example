@@ -13,7 +13,6 @@ on:
   pull_request:
     branches:
       - master
-  create:
   
 jobs:
   Inspect-Build:
