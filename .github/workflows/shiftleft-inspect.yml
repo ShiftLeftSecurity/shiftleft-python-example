@@ -2,7 +2,7 @@
 # Visit https://docs.shiftleft.io for help
 name: Analyze with ShiftLeft Inspect
 
-on:
+on:  
   schedule:
     - cron: "0 * * * *"  
   push:
@@ -13,7 +13,8 @@ on:
   pull_request:
     branches:
       - master
-
+  create:
+  
 jobs:
   Inspect-Build:
     runs-on: ubuntu-latest
