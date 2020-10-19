@@ -22,6 +22,6 @@ jobs:
     - name: NextGen Static Analysis
       run: |
         ${GITHUB_WORKSPACE}/sl analyze --wait --app import_test --tag app.group=SLPy --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)/import_test
-        ${GITHUB_WORKSPACE}/sl analyze --wait --app vulnerable_code --tag app.group=SLPy --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)/vulnerable_code
+        ${GITHUB_WORKSPACE}/sl analyze --wait --app vulnerable_code --tag app.group=SLPy --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python vulnerable_code
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
