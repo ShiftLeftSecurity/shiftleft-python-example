@@ -14,6 +14,9 @@ jobs:
       image: python:3.8-alpine
     steps:
     - uses: actions/checkout@v2
+    - name: Setup alpine
+      run: |
+        apk add curl wget
     - name: Download ShiftLeft CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
