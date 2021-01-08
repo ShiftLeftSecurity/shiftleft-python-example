@@ -1,0 +1,21 @@
+inspect:
+- app:
+    name: shiftleft-python-example
+    modify-findings:
+      - downgrade_sqli
+
+finding-modifications:
+  downgrade_sqli:
+    # Use filter to specify the category
+    filter:
+      category:
+        - SQL Injection
+    # Specify the value for the tags such as cvss_score, severity that you would like to use
+    # Optionally, you can add any custom tag. Eg: a reason tag is added here
+    tags:
+      - key: cvss_score
+        value: 5
+      - key: severity
+        value: moderate
+      - key: reason
+        value: appsec_approved

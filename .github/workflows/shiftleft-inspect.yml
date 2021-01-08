@@ -20,7 +20,9 @@ jobs:
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-python-example --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python .
+      run: |
+        ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-python-example --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python .
+        ${GITHUB_WORKSPACE}/sl modify-findings --app shiftleft-python-example
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
   Build-Rules: 
