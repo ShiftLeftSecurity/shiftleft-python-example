@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def things_to_run():
     yield "echo hello"
-    yield from request.get_json()["commands"]
+    yield from request.get_json()["commands"] # sl:ignore
     yield "echo done"
 
 
