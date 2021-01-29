@@ -10,8 +10,13 @@ on:
 jobs:
   NextGen-Static-Analysis:
     runs-on: ubuntu-20.04
+    container: 
+      image: python:3.8-alpine
     steps:
     - uses: actions/checkout@v2
+    - name: Setup alpine
+      run: |
+        apk add curl wget bash git
     - name: Download ShiftLeft CLI
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
@@ -20,11 +25,12 @@ jobs:
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-python-example --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python .
+      run: ${GITHUB_WORKSPACE}/sl analyze --verbose --wait --app shiftleft-python-example --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
   Build-Rules: 
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
     needs: NextGen-Static-Analysis
     steps:
     - uses: actions/checkout@v2
@@ -35,4 +41,4 @@ jobs:
       run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-python-example --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" --report --github-pr-number=${{github.event.number}} --github-pr-user=${{ github.repository_owner }} --github-pr-repo=${{ github.event.repository.name }}  --github-token=${{ secrets.GITHUB_TOKEN }}
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-  
+ 
